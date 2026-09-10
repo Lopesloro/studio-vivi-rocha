@@ -778,3 +778,84 @@ a:hover > .moldura img { transform: scale(1.05); }
 }
 .cartao-local:hover .cartao-local__cta svg { transform: translateX(5px); }
 .cartao-local__cta svg { transition: transform var(--dur) var(--ease); }
+
+/* ==========================================================================
+   8. RITMO DA HOME
+   Estrutura tirada da anatomia medida do site de referência: boas-vindas
+   centrada, título grande com tira de imagens, bloco de texto corrido, e
+   cada serviço ocupando uma seção inteira com a imagem alternando de lado.
+   Diferença deliberada: lá as cinco seções de serviço têm exatamente 992px
+   e a mesma composição. Aqui cada uma tem altura e proporção próprias.
+   ========================================================================== */
+
+/* --- boas-vindas: texto centrado, respiro largo ------------------------- */
+.boas-vindas { text-align: center; }
+.boas-vindas .container { max-width: 900px; }
+.boas-vindas h2 { margin-bottom: var(--space-md); }
+.boas-vindas p { margin-inline: auto; }
+.boas-vindas .acoes { justify-content: center; margin-top: var(--space-md); }
+
+/* --- título grande + tira de imagens ------------------------------------ */
+.manifesto { text-align: center; }
+.manifesto h2 {
+  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  max-width: 20ch; margin-inline: auto;
+}
+.tira {
+  display: grid; gap: var(--space-sm);
+  grid-template-columns: repeat(3, 1fr);
+  margin-block: var(--space-lg);
+}
+@media (max-width: 700px) {
+  .tira { grid-template-columns: 1fr; gap: var(--space-sm); }
+  .tira figure:nth-child(3) { display: none; }
+}
+.tira figure { margin: 0; }
+.tira .moldura { aspect-ratio: 3 / 4; }
+.tira figure:nth-child(2) .moldura { aspect-ratio: 4 / 5; }
+.manifesto .acoes { justify-content: center; }
+
+/* --- bloco de texto corrido em duas colunas ----------------------------- */
+.bloco-texto .container { max-width: 1040px; }
+.bloco-texto__colunas { display: grid; gap: var(--space-md); }
+@media (min-width: 820px) {
+  .bloco-texto__colunas { grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+}
+.bloco-texto p { font-size: var(--fs-lead); line-height: 1.62; color: var(--text-muted); }
+
+/* --- serviço em seção inteira, imagem alternando ------------------------ */
+.servico { display: grid; gap: var(--space-md); align-items: center; }
+@media (min-width: 900px) {
+  .servico { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-lg); }
+  /* a imagem sangra até a borda da tela, do lado em que estiver */
+  .servico--esq .servico__midia { margin-left: calc(-1 * var(--gutter)); }
+  .servico--dir .servico__midia { order: 2; margin-right: calc(-1 * var(--gutter)); }
+}
+.servico__midia .moldura { aspect-ratio: 4 / 5; }
+/* alturas e proporções próprias — nada de cinco seções idênticas */
+.servico--alta   .servico__midia .moldura { aspect-ratio: 3 / 4; }
+.servico--baixa  .servico__midia .moldura { aspect-ratio: 1 / 1; }
+.servico--larga  .servico__midia .moldura { aspect-ratio: 5 / 6; }
+
+.servico__texto { display: grid; gap: var(--space-sm); align-content: center; }
+.servico__n {
+  font-family: var(--font-display); font-size: .95rem;
+  letter-spacing: .16em; color: var(--accent);
+}
+.servico--sobre-escuro .servico__n { color: var(--accent-soft); }
+.servico__texto h2 { margin-bottom: .2rem; }
+.servico__texto p { color: var(--text-muted); }
+.secao--dark .servico__texto p { color: var(--muted-on-dark); }
+.servico__acao { margin-top: var(--space-xs); }
+
+/* --- como funciona o agendamento (ocupa o lugar do quadro de horários) --- */
+.agenda { display: grid; gap: var(--space-md); }
+@media (min-width: 860px) { .agenda { grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); } }
+.agenda__item { display: grid; gap: .6rem; padding-top: var(--space-sm); border-top: 1px solid var(--border); }
+.secao--dark .agenda__item { border-top-color: var(--border-dark); }
+.agenda__n {
+  font-family: var(--font-display); font-size: 2.4rem; line-height: 1;
+  color: var(--accent);
+}
+.secao--dark .agenda__n { color: var(--accent-soft); }
+.agenda__item h3 { font-size: 1.25rem; }

@@ -1,0 +1,10 @@
+{
+  "name": "Studio Vivi Rocha",
+  "short_name": "Vivi Rocha",
+  "description": "Corte, colorimetria e terapia capilar na Ilha do Governador, Rio de Janeiro.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EFEDE9",
+  "theme_color": "#EFEDE9",
+  "lang": "pt-BR"
+}

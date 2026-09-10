@@ -1032,3 +1032,11 @@ body.tem-hero .cabecalho:not(.solido) .hamburguer span { background: var(--text)
 /* alterna o fundo do painel para o ritmo não ficar chapado */
 .servico--claro .servico__texto { background: #FFFFFF; border: 1px solid var(--border); }
 @media (max-width: 899px) { .servico__midia { min-height: 420px; order: -1; } }
+
+/* o H1 da home vive na seção de boas-vindas, não sobre a foto do hero */
+.centro h1 {
+  font-weight: 600;
+  font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-md);
+}

@@ -859,3 +859,176 @@ a:hover > .moldura img { transform: scale(1.05); }
 }
 .secao--dark .agenda__n { color: var(--accent-soft); }
 .agenda__item h3 { font-size: 1.25rem; }
+
+/* ==========================================================================
+   9. SIMPLIFICAÇÃO — alinhamento com a referência
+   O dono apontou: a referência comunica porque é simples e tem contraste.
+   A versão anterior tinha véu escuro sobre a foto do hero, rótulo minúsculo
+   em caixa alta antes de cada título, fundo bege lavado e textura por cima.
+   Aqui: fundo branco, preto no texto, foto limpa, título grande e centrado.
+   ========================================================================== */
+
+:root {
+  --bg:          #FFFFFF;
+  --surface:     #FFFFFF;
+  --surface-alt: #F4F1EC;
+  --text:        #14110E;
+  --text-muted:  #554E45;
+  --border:      #E4DFD7;
+}
+
+/* a textura sai — era ruído sobre o conteúdo */
+.secao--alt::before { display: none !important; }
+
+/* cabeçalho sempre sólido e branco, como na referência */
+.cabecalho,
+body.tem-hero .cabecalho:not(.solido) {
+  background: #FFFFFF;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  border-bottom: 1px solid var(--border);
+}
+body.tem-hero .cabecalho:not(.solido) .marca__nome   { color: var(--text); }
+body.tem-hero .cabecalho:not(.solido) .marca__local  { color: var(--text-muted); }
+body.tem-hero .cabecalho:not(.solido) .menu__link    { color: var(--text); }
+body.tem-hero .cabecalho:not(.solido) .hamburguer span { background: var(--text); }
+
+/* HERO: só a foto. Sem véu, sem texto por cima, sem cartão flutuante.
+   O texto entra logo abaixo, em branco, onde se lê de verdade. */
+.hero--limpo {
+  min-height: 0;
+  height: clamp(380px, 72vh, 760px);
+  margin-top: var(--header-h);
+  padding: 0; display: block;
+}
+.hero--limpo .hero__veu,
+.hero--limpo .hero__conteudo,
+.hero--limpo .cartao-dado { display: none; }
+.hero--limpo .hero__fundo { position: absolute; inset: 0; }
+.hero--limpo .hero__fundo img { object-position: center 18%; }
+@media (max-width: 640px) { .hero--limpo .hero__fundo img { object-position: 46% 16%; } }
+
+/* títulos maiores, mais pesados e centrados nas seções de abertura */
+.centro { text-align: center; }
+.centro .container { max-width: 1000px; }
+.centro h2 {
+  font-weight: 600;
+  font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-md);
+}
+.centro p {
+  margin-inline: auto;
+  font-size: clamp(1.05rem, 1vw + 0.85rem, 1.3rem);
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+.centro .acoes { justify-content: center; margin-top: var(--space-md); }
+
+/* o rótulo minúsculo antes do título sai da home — era ruído */
+.centro .eyebrow, .servico .eyebrow { display: none; }
+
+/* serviço: rótulo simples em caixa alta, título grande, texto legível */
+.servico__n {
+  font-family: var(--font-body);
+  font-size: .82rem; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent);
+}
+.servico__texto h2 {
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+  margin-bottom: var(--space-xs);
+}
+.servico__texto p { font-size: 1.05rem; line-height: 1.7; }
+
+/* corpo de texto com mais contraste em todo o site */
+.lead { color: var(--text-muted); }
+.bloco-texto p { color: var(--text-muted); }
+
+/* ==========================================================================
+   10. BLOCO DE DESTAQUE — anatomia da segunda dobra da referência
+   Painel de texto em fundo bege de um lado, foto sangrando até a borda da
+   tela do outro, em altura cheia. Título pesado, três parágrafos, botão
+   retangular de borda. Canto vivo no site inteiro.
+   ========================================================================== */
+
+:root { --radius: 0px; }
+
+/* botões retangulares, como na referência — a pílula sai */
+.btn {
+  border-radius: 0;
+  letter-spacing: .12em;
+  font-weight: 600;
+}
+.btn--secundario,
+.btn--claro {
+  border-color: currentColor;
+  border-width: 1.5px;
+}
+.btn--secundario:hover { background: var(--text); color: #FFF; border-color: var(--text); }
+.chip { border-radius: 0; }
+.moldura { border-radius: 0; }
+.depoimento { border-radius: 0; }
+.objecao, .cartao, .cartao-local, .antes-depois, .mapa { border-radius: 0; }
+
+/* --- o bloco --- */
+.destaque { display: grid; }
+@media (min-width: 900px) {
+  .destaque { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .destaque--foto-dir .destaque__foto { order: 2; }
+}
+.destaque__painel {
+  background: var(--surface-alt);
+  padding: clamp(2.5rem, 5vw, 5.5rem) clamp(1.75rem, 4vw, 4.5rem);
+  display: flex; flex-direction: column; justify-content: center;
+  gap: var(--space-sm);
+}
+.destaque__painel h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-xs);
+}
+.destaque__painel p {
+  font-size: 1.05rem; line-height: 1.72; color: var(--text-muted);
+  max-width: 46ch; margin-bottom: 0;
+}
+.destaque__painel .acoes { margin-top: var(--space-md); }
+.destaque__foto { position: relative; min-height: 380px; }
+.destaque__foto img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+@media (max-width: 899px) {
+  .destaque__foto { min-height: 420px; order: -1; }
+}
+
+/* a seção que segura o bloco vai de borda a borda, sem container */
+.secao--sangria { padding-block: 0; }
+.secao--sangria > .destaque { max-width: none; }
+
+/* serviço: mesmo tratamento — painel de texto + foto sangrando */
+.servico { gap: 0; }
+@media (min-width: 900px) {
+  .servico { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .servico--esq .servico__midia,
+  .servico--dir .servico__midia { margin: 0; }
+  .servico--dir .servico__midia { order: 2; }
+}
+.servico__midia { position: relative; min-height: 380px; }
+.servico__midia .moldura {
+  position: absolute; inset: 0; aspect-ratio: auto !important; height: 100%;
+}
+.servico__texto {
+  background: var(--surface-alt);
+  padding: clamp(2.5rem, 5vw, 5.5rem) clamp(1.75rem, 4vw, 4.5rem);
+  gap: var(--space-sm);
+}
+.servico--esq .servico__texto,
+.servico--dir .servico__texto { background: var(--surface-alt); }
+/* alterna o fundo do painel para o ritmo não ficar chapado */
+.servico--claro .servico__texto { background: #FFFFFF; border: 1px solid var(--border); }
+@media (max-width: 899px) { .servico__midia { min-height: 420px; order: -1; } }
